@@ -1,0 +1,201 @@
+#!/bin/bash
+sl -e #This command runs a train.
+password=10
+
+if [[ $# != 2 ]]; then
+        #statements
+        echo "Please enter username and id"
+        sleep 0.7 #This command pause code for 0.7 second.
+        exit
+fi
+echo -e "Please enter the password: \c"
+sleep 0.7 #This command pause code for 0.7 second.
+read ans
+while [[ $ans != $password && $p -lt 5 ]]
+do
+        echo -e "Please enter the password correctly:\c"
+        sleep 0.2 #This command pause code for 0.2 second.
+   read ans
+        (( p++ ))
+        if [[ $p -gt 4 && $password != $ans ]]
+                then
+                        exit
+        fi
+done
+if ! [[ $1 =~ ^[a-zA-Z]+$ ]]
+        then
+                echo 'Invalid Input.First name contains invalid characters.'
+                sleep 0.6 # Pausing code execution for 0.6 second.
+                exit
+        elif ! [[ $2 =~ ^[0-9]+$ ]]
+        then
+                echo 'Invalid Input. User ID should only be integers'
+                sleep 0.5 #Pausing code execution for 0.5 second
+                exit
+        else
+figlet WELCOME
+        echo -e '+------------------------------------+'
+        echo -e '|------------Welcome!----------------|'
+        echo -e '|------------ID: '$2'----------------|'
+        echo -e '|------------Name: '$1' -------------|'
+        echo -e '|Program executed on '$(date)'-------|'
+        echo -e '+------------------------------------+'
+repeat()
+{
+
+value="yes"
+while [ $value = "yes" -o $value = "y" ]
+do
+echo "|-----------------------------------------|"
+echo "|Country Name        | Country Code       |"
+echo "|-----------------------------------------|"
+echo "|Brazil              | BRZ                |"
+echo "|-----------------------------------------|"
+echo "|Argentina           | ARG                |"
+echo "|-----------------------------------------|"
+echo "|Nepal               | NEP                |"
+echo "|China               | CHI                |"
+echo "|-----------------------------------------|"
+echo "|England             | ENG                |"
+echo "|-----------------------------------------|"
+
+echo -e "[*]CHOOSE COUNTRY CODE FROM ABOVE: \c"
+sleep 0.5 #This command pause code for 0.5 second.
+read code
+
+while [ true ]
+do
+case "$code" in
+BRZ)
+echo "This Country code was not selected!"
+sleep 0.4 #This command pause code for 0.4 second.
+repeat
+exit
+break
+;;
+ARG)
+echo "This Country code was not selected!"
+sleep 0.3
+repeat
+exit
+break
+;;
+NEP)
+echo "This is the correct Country code."
+echo "Kiran Chemjong is the goal keeper of Nepal."
+echo "Nepal has played World Cup Qualifer."
+break
+;;
+CHI)
+echo "This Country code is Not selected!"
+repeat
+exit
+break
+;;
+ENG)
+echo "This Country code is Not selected!"
+repeat
+exit
+break
+;;
+*)
+echo -e "!!Invalid Code!!\n[*]PLEASE SELECT THE CORRECT COUNTRY CODE AS GIVEN ABOVE: \c"
+sleep  0.4
+read code
+;;
+
+esac
+done
+echo "|------------------------------------------|"
+echo "| Players Name         | Players Code      |"
+echo "|------------------------------------------|"
+echo "| Lionel Messi         | LM                |"
+echo "|------------------------------------------|"
+echo "| Neymar Junior        | NJ                |"
+echo "|------------------------------------------|"
+echo "| Kiran Chemjong       | KC                |"
+echo "|------------------------------------------|"
+echo "| Zheng Zhi            | ZZ                |"
+echo "|------------------------------------------|"
+echo "| Harry Kane           | HK                |"
+echo "|------------------------------------------|"
+
+
+echo -e "Please enter any of three codes: \c"
+sleep 0.5
+read code1 code2 code3
+if [[ $code1 == "LM" || $code1 == "NJ" || $code1 == "KC" || $code1 == "ZZ" || $code1 == "HK" ]]
+        then
+                if [[ $code2 == "LM" || $code2 == "NJ" || $code2 == "KC" || $code2 == "ZZ" || $code2 == "HK" ]]
+                        then
+                        if [[ $code3 == "LM" || $code3 == "NJ" || $code3 == "KC" || $code3 == "ZZ" || $code3 == "HK" ]]
+                                then
+                                        until [[ $code1 != $code2 && $code2 != $code3 && $code3 != $code1 ]]
+                                        do
+                                        read -p 'Try Again!! You must not repeat code!' code1 code2 code3
+                                        done
+                        else
+                                        read -p 'Please enter only three player code:' code1 code2 code3
+                        fi
+                else
+
+                        read -p 'Second player code is not correct:' code1 code2 code3
+                fi
+else
+read -p 'First player code is not correct:' code1 code2 code3
+sleep 0.5
+fi
+
+Choice=" $code1 $code2 $code3 "
+PS3="Please enter the number from given list: "
+select option in $Choice
+do
+       if [[ -z "$option" ]]
+        then
+        echo "Please Enter a Valid Number"
+        continue
+        else
+                echo -e "\n"
+                echo "You have select the code $REPLY."
+                echo "Your selected player is $option."
+                if [[ $option = "LM" ]]
+                then
+                        echo -e "\n"
+                        cat LM
+			break
+                elif [[ $option = "NJ" ]]
+                then
+                        echo -e "\n"
+                        cat NJ
+                        break
+                elif [[ $option = "KC" ]]
+                then
+                        echo -e "\n"
+                        cat KC
+                        break
+                else
+                        echo -e "\n"
+                        echo "The given input is Invalid."
+                        echo "Sorry the file doesn't exist."
+                        repeat
+                        exit
+                        break
+                fi
+        fi
+done
+echo -e "\n"
+echo -e "DO YOU WANT TO PROCEED?(Y/N): \c"
+read value
+
+if [[ $value = "Y" || $value = "yes" || $value = "YES" ]]
+then
+        repeat
+else
+echo -e "*********************Program is terminating, Thankyou******************"
+        break
+fi
+done
+}
+fi
+repeat $1 $2
+
